@@ -1,0 +1,58 @@
+name: clean_architecture_rest_api_template
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  # state management
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
+
+  # Dependency Injection
+  get_it: ^8.0.3
+
+  # Internationalization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+  # utilities
+  provider: ^6.1.5
+  path_provider: ^2.1.5
+  equatable: ^2.0.7
+  freezed_annotation: ^2.4.4
+  mutex: ^3.1.0
+  logger: ^2.5.0
+  pretty_dio_logger: ^1.4.0
+  dio: ^5.8.0+1
+
+  # database
+  sembast: ^3.8.5+1
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^9.2.4
+
+  # secrets
+  envied: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  freezed: ^2.4.7
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.9
+  envied_generator: ^1.1.1
+
+flutter_intl:
+  enabled: true
+
+flutter:
+  uses-material-design: true
+  generate: true
