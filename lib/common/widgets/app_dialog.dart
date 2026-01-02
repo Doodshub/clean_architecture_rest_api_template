@@ -1,7 +1,7 @@
-import 'package:clean_architecture_rest_api_template/common/extensions/responsive_extension.dart';
-import 'package:clean_architecture_rest_api_template/common/extensions/text_extension.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/button_styles.dart';
-import 'package:clean_architecture_rest_api_template/common/widgets/buttons/primary_button_widget.dart';
+import 'package:clean_architecture_template/common/extensions/responsive_extension.dart';
+import 'package:clean_architecture_template/common/extensions/text_extension.dart';
+import 'package:clean_architecture_template/common/styles/button_styles.dart';
+import 'package:clean_architecture_template/common/widgets/buttons/primary_button_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../common/styles/app_colors.dart';
 

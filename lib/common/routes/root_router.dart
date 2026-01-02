@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:clean_architecture_rest_api_template/common/routes/route_helper.dart';
+import 'package:clean_architecture_template/common/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 
 class RootRouter implements AppRouter {
@@ -13,6 +13,12 @@ class RootRouter implements AppRouter {
   static const String root = '/';
 
   late LinkedHashMap<String, RouteBuilder> routes = LinkedHashMap();
+
+  /// Add a custom route to this router.
+  @override
+  void addRoute(String routeName, RouteBuilder builder) {
+    routes[routeName] = builder;
+  }
 
   Route getRoute(RouteSettings settings) {
     final route = routes[settings.name];

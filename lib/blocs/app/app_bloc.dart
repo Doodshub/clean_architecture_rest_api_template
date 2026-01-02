@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:clean_architecture_rest_api_template/common/const/preference_keys.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/common/const/preference_keys.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

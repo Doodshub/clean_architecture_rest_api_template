@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/app_colors.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/icon_themes.dart';
+import 'package:clean_architecture_template/common/styles/app_colors.dart';
+import 'package:clean_architecture_template/common/styles/icon_themes.dart';
 
 class AppBarThemes {
   const AppBarThemes._();
@@ -18,7 +18,7 @@ class AppBarThemes {
   );
 
   static const darkStyle = AppBarTheme(
-    color: CustomAppColors.darkScaffold,
+    backgroundColor: CustomAppColors.darkScaffold,
     elevation: 0,
     iconTheme: IconThemes.darkStyle,
   );

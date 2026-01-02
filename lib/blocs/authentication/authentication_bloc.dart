@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:clean_architecture_rest_api_template/common/bloc/event.dart';
-import 'package:clean_architecture_rest_api_template/common/bloc/state.dart';
-import 'package:clean_architecture_rest_api_template/common/models/user/user.dart';
-import 'package:clean_architecture_rest_api_template/common/services/modal_service.dart';
-import 'package:clean_architecture_rest_api_template/common/services/token_service.dart';
-import 'package:clean_architecture_rest_api_template/common/services/user_service.dart';
-import 'package:clean_architecture_rest_api_template/common/widgets/app_dialog.dart';
-import 'package:clean_architecture_rest_api_template/data/database/database_service.dart';
-import 'package:clean_architecture_rest_api_template/data/database/databases.dart';
-import 'package:clean_architecture_rest_api_template/data/repositories/authentication_repository.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/common/bloc/event.dart';
+import 'package:clean_architecture_template/common/bloc/state.dart';
+import 'package:clean_architecture_template/common/models/user/user.dart';
+import 'package:clean_architecture_template/common/services/modal_service.dart';
+import 'package:clean_architecture_template/common/services/user_service.dart';
+import 'package:clean_architecture_template/common/widgets/app_dialog.dart';
+import 'package:clean_architecture_template/data/database/database_service.dart';
+import 'package:clean_architecture_template/data/database/databases.dart';
+import 'package:clean_architecture_template/data/repositories/authentication_repository.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:logger/web.dart';
 
 part 'authentication_event.dart';
@@ -22,7 +21,7 @@ class AuthenticationBloc
   final AuthenticationRepository _authenticationRepository;
   // final TokenService tokenService;
 
-  StreamSubscription<User?>? userSubscription;
+  StreamSubscription<BaseUser?>? userSubscription;
 
   AuthenticationBloc()
     : _authenticationRepository = sl<AuthenticationRepository>(),
@@ -144,8 +143,8 @@ class AuthenticationBloc
       return;
     }
 
-    user = user.copyWith(isAuthenticated: true);
-
+    // Note: Consuming apps must ensure their User model's fromJson creates
+    // an authenticated user, or they should override this method
     final databaseService = sl<DatabaseService>();
     await databaseService.insertOrUpdate(
       UserDatabase().name,
@@ -167,7 +166,8 @@ class AuthenticationBloc
     UserAsUnAuthenticatedStream event,
     Emitter<AuthenticationState> emit,
   ) async {
-    emit(state.copyWith(user: state.user?.copyWith(isAuthenticated: false)));
+    // Clear user - mark as unauthenticated
+    emit(state.copyWith(user: null));
   }
 
   FutureOr<void> _onFetchUser(
@@ -175,16 +175,16 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     emit(state.copyWith(isFetchingUser: true));
-    var user = await _authenticationRepository.getMe();
+    final user = await _authenticationRepository.getMe();
 
     if (user == null) {
+      emit(state.copyWith(isFetchingUser: false));
       return;
     }
 
     sl<Logger>().i({'User': user.toJson()});
 
-    user = user.copyWith(isAuthenticated: true);
-
+    // Store user in database
     final databaseService = sl<DatabaseService>();
     await databaseService.insertOrUpdate(
       UserDatabase().name,

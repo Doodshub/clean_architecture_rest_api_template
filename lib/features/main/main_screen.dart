@@ -1,6 +1,6 @@
-import 'package:clean_architecture_rest_api_template/common/routes/main_router.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/authenticated_dependency_provider.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/common/routes/main_router.dart';
+import 'package:clean_architecture_template/dependencies/authenticated_dependency_provider.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

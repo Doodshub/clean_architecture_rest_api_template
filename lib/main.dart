@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:clean_architecture_rest_api_template/main_app.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/main_app.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {

@@ -3,7 +3,7 @@ part of 'authentication_bloc.dart';
 class AuthenticationState extends BlocState {
   final bool? isLoggingIn;
   final bool? isRegisteringUser;
-  final User? user;
+  final BaseUser? user;
   final Exception? error;
   final bool? isFetchingUser;
 
@@ -27,7 +27,7 @@ class AuthenticationState extends BlocState {
   AuthenticationState copyWith({
     bool? isLoggingIn,
     bool? isRegisteringUser,
-    User? user,
+    BaseUser? user,
     bool? isIntentToLogout,
     Exception? error,
     bool? isFetchingUser,

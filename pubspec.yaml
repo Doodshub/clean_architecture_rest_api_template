@@ -1,5 +1,5 @@
-name: clean_architecture_rest_api_template
-description: "A new Flutter project."
+name: clean_architecture_template
+description: "A comprehensive Flutter template library providing clean architecture patterns, authentication, dependency injection, routing, and styling utilities for REST API applications."
 publish_to: "none"
 
 version: 1.0.0+1
@@ -21,13 +21,14 @@ dependencies:
   # Internationalization
   flutter_localizations:
     sdk: flutter
-  intl: ^0.19.0
+  intl: ^0.20.2
 
   # utilities
   provider: ^6.1.5
   path_provider: ^2.1.5
   equatable: ^2.0.7
   freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
   mutex: ^3.1.0
   logger: ^2.5.0
   pretty_dio_logger: ^1.4.0

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:clean_architecture_rest_api_template/common/styles/app_colors.dart';
+import 'package:clean_architecture_template/common/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DashedBorderPainter extends CustomPainter {

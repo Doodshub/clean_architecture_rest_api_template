@@ -37,7 +37,7 @@ class LoginUser extends AuthenticationEvent {
 
 /// Login user
 class UserStream extends AuthenticationEvent {
-  final User? user;
+  final BaseUser? user;
 
   const UserStream(this.user);
   @override

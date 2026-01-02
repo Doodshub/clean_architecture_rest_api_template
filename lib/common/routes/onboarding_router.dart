@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:clean_architecture_rest_api_template/common/routes/route_helper.dart';
+import 'package:clean_architecture_template/common/routes/route_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 class OnboardingRouter implements AppRouter {
@@ -18,6 +18,12 @@ class OnboardingRouter implements AppRouter {
     login: ({settings}) => _buildRoute(const SizedBox(), settings: settings),
     register: ({settings}) => _buildRoute(const SizedBox(), settings: settings),
   });
+
+  /// Add a custom route to this router.
+  @override
+  void addRoute(String routeName, RouteBuilder builder) {
+    routes[routeName] = builder;
+  }
 
   /// The route being passed in [Navigator]'s onGenerateRoute
   Route getRoute(RouteSettings settings) {

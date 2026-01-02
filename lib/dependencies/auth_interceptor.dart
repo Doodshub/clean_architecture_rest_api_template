@@ -1,6 +1,6 @@
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
-import 'package:clean_architecture_rest_api_template/models/app_environment.dart';
-import 'package:clean_architecture_rest_api_template/services/token_service.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/models/app_environment.dart';
+import 'package:clean_architecture_template/services/token_service.dart';
 import 'package:dio/dio.dart';
 
 class AuthInterceptor extends InterceptorsWrapper {

@@ -1,12 +1,12 @@
-import 'package:clean_architecture_rest_api_template/common/routes/root_router.dart';
-import 'package:clean_architecture_rest_api_template/common/utils/context_utils.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/app_dependency_provider.dart';
-import 'package:clean_architecture_rest_api_template/features/landing/landing_screen.dart';
+import 'package:clean_architecture_template/common/routes/root_router.dart';
+import 'package:clean_architecture_template/common/utils/context_utils.dart';
+import 'package:clean_architecture_template/dependencies/app_dependency_provider.dart';
+import 'package:clean_architecture_template/features/landing/landing_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/app_themes.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/common/styles/app_themes.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:clean_architecture_rest_api_template/generated/l10n.dart';
+import 'package:clean_architecture_template/generated/l10n.dart';
 
 class MainApp extends StatelessWidget {
   final DependencyManager dependencyManager;
@@ -32,7 +32,26 @@ class MainApp extends StatelessWidget {
       home: GestureDetector(
         onTap: hideKeyboard,
         child: AppDependencyProvider(
-          child: LandingScreen(dependencyManager: dependencyManager),
+          child: LandingScreen(
+            dependencyManager: dependencyManager,
+            // Apps consuming this template must provide these builders
+            authenticatedBuilder:
+                (context, authState) => const Scaffold(
+                  body: Center(
+                    child: Text(
+                      'Authenticated - Implement your MainScreen here',
+                    ),
+                  ),
+                ),
+            unauthenticatedBuilder:
+                (context) => const Scaffold(
+                  body: Center(
+                    child: Text(
+                      'Unauthenticated - Implement your OnboardingScreen here',
+                    ),
+                  ),
+                ),
+          ),
         ),
       ),
     );

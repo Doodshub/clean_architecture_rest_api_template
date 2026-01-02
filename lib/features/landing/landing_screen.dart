@@ -1,14 +1,48 @@
-import 'package:clean_architecture_rest_api_template/blocs/app/app_bloc.dart';
-import 'package:clean_architecture_rest_api_template/blocs/authentication/authentication_bloc.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/dependency_manager.dart';
-import 'package:clean_architecture_rest_api_template/features/home/home_screen.dart';
+import 'package:clean_architecture_template/blocs/app/app_bloc.dart';
+import 'package:clean_architecture_template/blocs/authentication/authentication_bloc.dart';
+import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 
+/// Landing screen that handles app initialization and authentication flow.
+///
+/// This screen manages the transition between splash screen, authentication,
+/// and the main app. Consuming apps must provide builders for authenticated
+/// and unauthenticated states.
+///
+/// Example:
+/// ```dart
+/// LandingScreen(
+///   dependencyManager: dependencyManager,
+///   splashScreenBuilder: (context) => MySplashScreen(),
+///   authenticatedBuilder: (context, authState) => MainScreen(),
+///   unauthenticatedBuilder: (context) => OnboardingScreen(),
+/// )
+/// ```
 class LandingScreen extends StatefulWidget {
   final DependencyManager dependencyManager;
-  const LandingScreen({super.key, required this.dependencyManager});
+
+  /// Builder for the splash screen shown during app initialization.
+  /// If null, shows an empty SizedBox.
+  final Widget Function(BuildContext)? splashScreenBuilder;
+
+  /// Builder for the authenticated state.
+  /// Receives the current AuthenticationState.
+  /// Required - apps must provide their main authenticated UI.
+  final Widget Function(BuildContext, AuthenticationState) authenticatedBuilder;
+
+  /// Builder for the unauthenticated state.
+  /// Required - apps must provide their onboarding/login UI.
+  final Widget Function(BuildContext) unauthenticatedBuilder;
+
+  const LandingScreen({
+    super.key,
+    required this.dependencyManager,
+    required this.authenticatedBuilder,
+    required this.unauthenticatedBuilder,
+    this.splashScreenBuilder,
+  });
 
   @override
   State<LandingScreen> createState() => _LandingScreenState();
@@ -50,7 +84,7 @@ class _LandingScreenState extends State<LandingScreen> {
       },
       builder: (context, appState) {
         if (appState.showSplashScreen ?? false) {
-          return const SizedBox();
+          return widget.splashScreenBuilder?.call(context) ?? const SizedBox();
         }
         return BlocConsumer<AuthenticationBloc, AuthenticationState>(
           listenWhen: (previous, current) => previous != current,
@@ -61,11 +95,12 @@ class _LandingScreenState extends State<LandingScreen> {
             }
           },
           builder: (context, state) {
-            // if (state.user == null || !(state.user?.isAuthenticated ?? false)) {
-            //   return const OnboardingScreen();
-            // }
+            // Check if user is authenticated
+            if (state.user == null || !(state.user?.isAuthenticated ?? false)) {
+              return widget.unauthenticatedBuilder(context);
+            }
 
-            return const HomeScreen();
+            return widget.authenticatedBuilder(context, state);
           },
         );
       },

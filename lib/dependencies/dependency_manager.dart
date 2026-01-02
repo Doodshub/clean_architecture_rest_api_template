@@ -1,17 +1,17 @@
-import 'package:clean_architecture_rest_api_template/blocs/app/app_bloc.dart';
-import 'package:clean_architecture_rest_api_template/common/routes/main_router.dart';
-import 'package:clean_architecture_rest_api_template/common/routes/onboarding_router.dart';
-import 'package:clean_architecture_rest_api_template/common/routes/root_router.dart';
-import 'package:clean_architecture_rest_api_template/common/routes/route_helper.dart';
-import 'package:clean_architecture_rest_api_template/common/services/modal_service.dart';
-import 'package:clean_architecture_rest_api_template/common/services/user_service.dart';
-import 'package:clean_architecture_rest_api_template/common/utils/app_logger.dart';
-import 'package:clean_architecture_rest_api_template/data/database/database_service.dart';
-import 'package:clean_architecture_rest_api_template/data/repositories/authentication_repository.dart';
-import 'package:clean_architecture_rest_api_template/dependencies/auth_interceptor.dart';
-import 'package:clean_architecture_rest_api_template/env/env.dart';
-import 'package:clean_architecture_rest_api_template/models/app_environment.dart';
-import 'package:clean_architecture_rest_api_template/services/token_service.dart';
+import 'package:clean_architecture_template/blocs/app/app_bloc.dart';
+import 'package:clean_architecture_template/common/routes/main_router.dart';
+import 'package:clean_architecture_template/common/routes/onboarding_router.dart';
+import 'package:clean_architecture_template/common/routes/root_router.dart';
+import 'package:clean_architecture_template/common/routes/route_helper.dart';
+import 'package:clean_architecture_template/common/services/modal_service.dart';
+import 'package:clean_architecture_template/common/services/user_service.dart';
+import 'package:clean_architecture_template/common/utils/app_logger.dart';
+import 'package:clean_architecture_template/data/database/database_service.dart';
+import 'package:clean_architecture_template/data/repositories/authentication_repository.dart';
+import 'package:clean_architecture_template/dependencies/auth_interceptor.dart';
+import 'package:clean_architecture_template/env/env.dart';
+import 'package:clean_architecture_template/models/app_environment.dart';
+import 'package:clean_architecture_template/services/token_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -37,6 +37,32 @@ extension GetItExtension on GetIt {
   }
 }
 
+/// Central dependency manager for the application.
+///
+/// This class manages all dependency injection using GetIt.
+/// Consuming apps can extend this to register additional dependencies.
+///
+/// Example:
+/// ```dart
+/// final dependencyManager = DependencyManager();
+///
+/// // Register custom repositories
+/// dependencyManager.registerRepository<ProductRepository>(
+///   () => ProductRepository(dio: sl<Dio>()),
+/// );
+///
+/// // Register custom services
+/// dependencyManager.registerService<NotificationService>(
+///   () => NotificationService(),
+/// );
+///
+/// // Register custom blocs
+/// dependencyManager.registerBloc<ProductBloc>(
+///   () => ProductBloc(),
+/// );
+///
+/// await dependencyManager.init();
+/// ```
 class DependencyManager {
   bool initialized = false;
 
@@ -69,6 +95,57 @@ class DependencyManager {
     provideFlutterSecureStorage();
 
     sl<Logger>().i({"Initialized"});
+  }
+
+  /// Register a custom repository.
+  /// Call this before calling init().
+  ///
+  /// Example:
+  /// ```dart
+  /// dependencyManager.registerRepository<ProductRepository>(
+  ///   () => ProductRepository(dio: sl<Dio>()),
+  /// );
+  /// ```
+  void registerRepository<T extends Object>(T Function() factoryFunc) {
+    sl.registerLazySingleton<T>(factoryFunc);
+  }
+
+  /// Register a custom service.
+  /// Call this before calling init().
+  ///
+  /// Example:
+  /// ```dart
+  /// dependencyManager.registerService<NotificationService>(
+  ///   () => NotificationService(database: sl<DatabaseService>()),
+  /// );
+  /// ```
+  void registerService<T extends Object>(T Function() factoryFunc) {
+    sl.registerLazySingleton<T>(factoryFunc);
+  }
+
+  /// Register a custom bloc.
+  /// Call this before calling init().
+  ///
+  /// Example:
+  /// ```dart
+  /// dependencyManager.registerBloc<ProductBloc>(
+  ///   () => ProductBloc(repository: sl<ProductRepository>()),
+  /// );
+  /// ```
+  void registerBloc<T extends Object>(T Function() factoryFunc) {
+    sl.registerLazySingleton<T>(factoryFunc);
+  }
+
+  /// Register any custom singleton dependency.
+  /// Call this before calling init().
+  void registerSingleton<T extends Object>(T instance) {
+    sl.registerSingleton<T>(instance);
+  }
+
+  /// Register any custom lazy singleton dependency.
+  /// Call this before calling init().
+  void registerLazySingleton<T extends Object>(T Function() factoryFunc) {
+    sl.registerLazySingleton<T>(factoryFunc);
   }
 
   void provideDIO() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:clean_architecture_rest_api_template/common/models/responsive.dart';
+import 'package:clean_architecture_template/common/models/responsive.dart';
 
 extension ResponsiveExtension on BuildContext {
   double get width => MediaQuery.of(this).size.width;

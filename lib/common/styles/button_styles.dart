@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/app_colors.dart';
-import 'package:clean_architecture_rest_api_template/common/styles/text_themes.dart';
+import 'package:clean_architecture_template/common/styles/app_colors.dart';
+import 'package:clean_architecture_template/common/styles/text_themes.dart';
 
 class ButtonStyles {
   const ButtonStyles._();
