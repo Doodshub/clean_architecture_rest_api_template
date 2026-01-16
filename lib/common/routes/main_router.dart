@@ -35,7 +35,10 @@ class MainRouter implements AppRouter {
   /// The route being passed in [Navigator]'s onGenerateRoute
   Route getRoute(RouteSettings settings) {
     final route = routes[settings.name];
-    assert(route != null, "Route is not declared");
+    assert(
+      route != null,
+      "Route '\${settings.name}' is not declared in MainRouter",
+    );
     return route!(settings: settings);
   }
 

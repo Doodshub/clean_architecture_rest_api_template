@@ -82,8 +82,6 @@ export 'models/app_environment.dart';
 
 // Features
 export 'features/landing/landing_screen.dart';
-export 'features/base/base_screen.dart';
-export 'features/main/main_screen.dart';
 
 // Main app setup
 export 'main_app.dart';

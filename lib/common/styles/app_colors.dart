@@ -8,49 +8,49 @@ extension BuildContextColorExtension on BuildContext {
 class CustomAppColors {
   const CustomAppColors._();
 
-  static const primary = Color(0xFF3498DB);
+  static const primary = Color(0xFF5C8D89);
 
-  static const primaryVariant = Color(0xFF2C3E50);
+  static const primaryVariant = Color(0xFF4A7471);
 
-  static const secondary = Color(0xFF03DAC6);
+  static const secondary = Color(0xFF8BB5B1);
 
-  static const secondaryVariant = Color(0xFF018786);
+  static const secondaryVariant = Color(0xFF72A09C);
 
   static const white = Color(0xFFFFFFFF);
 
-  static const primaryBackground = Color(0xFFFFFFFF);
+  static const primaryBackground = Color(0xFFF5F9F8);
 
-  static const secondaryBackground = Color(0xFFf2f2f2);
+  static const secondaryBackground = Color(0xFFEDF4F3);
 
-  static const primaryText = Color(0xFF12151c);
+  static const primaryText = Color(0xFF1F2D2C);
 
-  static const secondaryText = Color(0xFF5a5c60);
+  static const secondaryText = Color(0xFF5A6665);
 
-  static const gray1 = Color(0xFF222222);
+  static const gray1 = Color(0xFF2C3A39);
 
-  static const gray2 = Color(0xFF7E7F80);
+  static const gray2 = Color(0xFF778988);
 
-  static const gray3 = Color(0xFF828282);
+  static const gray3 = Color(0xFF95A5A4);
 
-  static const gray4 = Color(0xFFBDBDBD);
+  static const gray4 = Color(0xFFC4D0CF);
 
-  static const gray5 = Color(0xFFE0E0E0);
+  static const gray5 = Color(0xFFE5EDED);
 
-  static const gray6 = Color(0xFFF2F2F2);
+  static const gray6 = Color(0xFFF3F7F6);
 
-  static const error = Color(0xFFE65454);
+  static const error = Color(0xFFD87676);
 
-  static const alert = Color(0xFFDE1F42);
+  static const alert = Color(0xFFC86868);
 
-  static const success = Color(0xFF02CA79);
+  static const success = Color(0xFF5C8D89);
 
-  static const warning = Color(0xFFF1C40F);
+  static const warning = Color(0xFFE8C488);
 
-  static const darkScaffold = Color(0xff111827);
+  static const darkScaffold = Color(0xFF1F2D2C);
 
-  static const darkPrimary = Color(0xFF1C1C1C);
+  static const darkPrimary = Color(0xFF2C3A39);
 
-  static const darkCards = Color(0xFF1C1C1C);
+  static const darkCards = Color(0xFF3A4847);
 }
 
 class AppColors extends ThemeExtension<AppColors> {
@@ -83,59 +83,59 @@ class AppColors extends ThemeExtension<AppColors> {
 
   factory AppColors.defaultStyle() {
     return const AppColors(
-      text: Color.fromRGBO(0, 0, 0, .85),
-      secondaryText: Color.fromRGBO(0, 0, 0, .65),
-      accentText: Color(0xFFBDBDBD),
+      text: Color(0xFF1F2D2C),
+      secondaryText: Color(0xFF5A6665),
+      accentText: Color(0xFFC4D0CF),
       textOnColour: Color(0xFFFFFFFF),
-      link: Color(0xFF563095),
-      secondaryTextOnColour: Color(0xFFFFFFFF),
-      placeholder: Color.fromRGBO(0, 0, 0, .45),
-      disabledText: Color(0xFFD9D9D9),
-      successText: Color(0xFF1E622F),
-      attentionText: Color(0xFFB36205),
-      warningText: Color(0xFFD41D16),
-      neutralText: Color(0xFF625B71),
-      tappable: Color(0xFF77216f),
-      accent: Color(0xFFD9D9D9),
+      link: Color(0xFF5C8D89),
+      secondaryTextOnColour: Color(0xFFF5F9F8),
+      placeholder: Color(0xFF95A5A4),
+      disabledText: Color(0xFFC4D0CF),
+      successText: Color(0xFF4A7471),
+      attentionText: Color(0xFFCA9A6A),
+      warningText: Color(0xFFD87676),
+      neutralText: Color(0xFF778988),
+      tappable: Color(0xFF5C8D89),
+      accent: Color(0xFFE5EDED),
       foreground: Color(0xFFFFFFFF),
-      background: Color(0xFFFAFAFA),
-      divider: Color.fromRGBO(0, 0, 0, .25),
-      disabled: Colors.black12,
-      success: Color(0xFF35783C),
-      attention: Color(0xFFE49318),
-      warning: Color(0xFFD41D16),
-      neutral: Color(0xFF625B71),
-      information: Color(0xFF563095),
-      scrim: Color.fromRGBO(0, 0, 0, .65),
+      background: Color(0xFFF5F9F8),
+      divider: Color(0xFFC4D0CF),
+      disabled: Color(0xFFE5EDED),
+      success: Color(0xFF5C8D89),
+      attention: Color(0xFFE8C488),
+      warning: Color(0xFFD87676),
+      neutral: Color(0xFF95A5A4),
+      information: Color(0xFF5C8D89),
+      scrim: Color(0x99000000),
     );
   }
 
   factory AppColors.dark() {
     return const AppColors(
-      text: Color(0xFFFFFFFF),
-      secondaryText: Color.fromRGBO(255, 255, 255, 0.65),
-      accentText: Color(0xFFE8DEF8),
-      textOnColour: Color(0xFFFFFFFF),
-      link: Color(0xFFD0BCFF),
-      secondaryTextOnColour: Color(0xFFB3AEBC),
-      placeholder: Color.fromRGBO(255, 255, 255, 0.35),
-      disabledText: Color(0xFF49454F),
-      successText: Color(0xFFB7F397),
-      attentionText: Color(0xFFEFBE74),
-      warningText: Color(0xFFFF827B),
-      neutralText: Color(0xFFD9D9D9),
-      tappable: Color(0xFFeb3d1e),
-      accent: Color(0xFFD9D9D9),
-      foreground: Color(0xFFD9D9D9),
-      background: Color(0xFFD9D9D9),
-      divider: Color.fromRGBO(255, 255, 255, 0.25),
-      disabled: Color.fromRGBO(255, 255, 255, 0.12),
-      success: Color(0xFFD9D9D9),
-      attention: Color(0xFFD9D9D9),
-      warning: Color(0xFFFF827B),
-      neutral: Color(0xFFCAC4D0),
-      information: Color(0xFFD0BCFF),
-      scrim: Color.fromRGBO(255, 255, 255, 0.35),
+      text: Color(0xFFEDF4F3),
+      secondaryText: Color(0xFFB4C5C4),
+      accentText: Color(0xFFD0E0DF),
+      textOnColour: Color(0xFF1F2D2C),
+      link: Color(0xFF8BB5B1),
+      secondaryTextOnColour: Color(0xFF2C3A39),
+      placeholder: Color(0xFF778988),
+      disabledText: Color(0xFF5A6665),
+      successText: Color(0xFF8BB5B1),
+      attentionText: Color(0xFFE6D4A8),
+      warningText: Color(0xFFE89C9C),
+      neutralText: Color(0xFFB4C5C4),
+      tappable: Color(0xFF8BB5B1),
+      accent: Color(0xFF5A6665),
+      foreground: Color(0xFF3A4847),
+      background: Color(0xFF1F2D2C),
+      divider: Color(0xFF5A6665),
+      disabled: Color(0xFF3A4847),
+      success: Color(0xFF8BB5B1),
+      attention: Color(0xFFE6D4A8),
+      warning: Color(0xFFE89C9C),
+      neutral: Color(0xFF95A5A4),
+      information: Color(0xFF8BB5B1),
+      scrim: Color(0xB3000000),
     );
   }
 

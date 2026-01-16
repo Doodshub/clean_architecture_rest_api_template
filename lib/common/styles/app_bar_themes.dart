@@ -21,5 +21,10 @@ class AppBarThemes {
     backgroundColor: CustomAppColors.darkScaffold,
     elevation: 0,
     iconTheme: IconThemes.darkStyle,
+    titleTextStyle: TextStyle(
+      color: Color(0xFFF5EDE8),
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+    ),
   );
 }

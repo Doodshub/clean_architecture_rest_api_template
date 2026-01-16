@@ -33,6 +33,7 @@ dependencies:
   logger: ^2.5.0
   pretty_dio_logger: ^1.4.0
   dio: ^5.8.0+1
+  google_fonts: ^6.2.1
 
   # database
   sembast: ^3.8.5+1

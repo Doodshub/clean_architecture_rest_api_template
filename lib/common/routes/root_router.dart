@@ -22,7 +22,10 @@ class RootRouter implements AppRouter {
 
   Route getRoute(RouteSettings settings) {
     final route = routes[settings.name];
-    assert(route != null, "Route is not declared");
+    assert(
+      route != null,
+      "Route '\${settings.name}' is not declared in RootRouter",
+    );
     return route!(settings: settings);
   }
 }

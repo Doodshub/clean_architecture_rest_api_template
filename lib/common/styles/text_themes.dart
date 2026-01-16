@@ -1,95 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:clean_architecture_template/common/styles/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextThemes {
   const TextThemes._();
 
-  static const fontFamily = 'AdelleSans';
-
-  static TextTheme defaultStyle = const TextTheme(
+  static final defaultStyle = TextTheme(
     // headline1
-    displayLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontWeight: FontWeight.w900,
+    displayLarge: GoogleFonts.playfairDisplay(
+      fontWeight: FontWeight.w700,
       fontSize: 57,
       letterSpacing: -0.25,
       color: CustomAppColors.primaryText,
     ),
     // headline2
-    displayMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontWeight: FontWeight.w700,
+    displayMedium: GoogleFonts.playfairDisplay(
+      fontWeight: FontWeight.w600,
       fontSize: 34,
-      letterSpacing: .5,
+      letterSpacing: 0,
       color: CustomAppColors.primaryText,
     ),
     // headline3
-    displaySmall: TextStyle(
-      fontFamily: fontFamily,
-      fontWeight: FontWeight.w700,
+    displaySmall: GoogleFonts.playfairDisplay(
+      fontWeight: FontWeight.w600,
       fontSize: 28,
-      letterSpacing: .5,
+      letterSpacing: 0,
       color: CustomAppColors.primaryText,
     ),
     // headline4
-    headlineMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontWeight: FontWeight.w700,
+    headlineMedium: GoogleFonts.playfairDisplay(
+      fontWeight: FontWeight.w600,
       fontSize: 24,
-      letterSpacing: 0.5,
+      letterSpacing: 0,
       color: CustomAppColors.primaryText,
     ),
     // headline5
-    headlineSmall: TextStyle(
-      fontFamily: fontFamily,
-      fontWeight: FontWeight.w700,
+    headlineSmall: GoogleFonts.playfairDisplay(
+      fontWeight: FontWeight.w600,
       fontSize: 20,
-      letterSpacing: 0.25,
+      letterSpacing: 0,
       color: CustomAppColors.primaryText,
     ),
     // headline6
-    titleLarge: TextStyle(
-      fontFamily: fontFamily,
+    titleLarge: GoogleFonts.lora(
       fontWeight: FontWeight.w600,
       fontSize: 20,
-      letterSpacing: 0.25,
+      letterSpacing: 0.15,
       color: CustomAppColors.primaryText,
     ),
     // bodyText1
-    bodyLarge: TextStyle(
-      fontFamily: fontFamily,
+    bodyLarge: GoogleFonts.lora(
       fontWeight: FontWeight.w400,
       fontSize: 18,
       letterSpacing: 0.5,
       color: CustomAppColors.primaryText,
     ),
     // bodyText2
-    bodyMedium: TextStyle(
-      fontFamily: fontFamily,
+    bodyMedium: GoogleFonts.lora(
       fontWeight: FontWeight.w400,
       fontSize: 16,
       letterSpacing: 0.25,
       color: CustomAppColors.primaryText,
     ),
-    labelLarge: TextStyle(
-      fontFamily: fontFamily,
+    labelLarge: GoogleFonts.lora(
       fontWeight: FontWeight.w600,
       fontSize: 18,
-      letterSpacing: .25,
+      letterSpacing: 0.1,
       color: CustomAppColors.primaryText,
     ),
-    labelMedium: TextStyle(
-      fontFamily: fontFamily,
+    labelMedium: GoogleFonts.lora(
       fontWeight: FontWeight.w500,
       fontSize: 16,
-      letterSpacing: .25,
+      letterSpacing: 0.1,
       color: CustomAppColors.primaryText,
     ),
-    labelSmall: TextStyle(
-      fontFamily: fontFamily,
+    labelSmall: GoogleFonts.lora(
       fontWeight: FontWeight.w400,
       fontSize: 14,
-      letterSpacing: .25,
+      letterSpacing: 0.1,
       color: CustomAppColors.primaryText,
     ),
   );
@@ -97,34 +85,42 @@ class TextThemes {
   static TextTheme darkStyle = TextTheme(
     // headline1
     displayLarge: defaultStyle.displayLarge!.copyWith(
-      color: CustomAppColors.white,
+      color: const Color(0xFFF5EDE8),
     ),
     // headline2
     displayMedium: defaultStyle.displayMedium!.copyWith(
-      color: CustomAppColors.white,
+      color: const Color(0xFFF5EDE8),
     ),
     // headline3
     displaySmall: defaultStyle.displaySmall!.copyWith(
-      color: CustomAppColors.white,
+      color: const Color(0xFFF5EDE8),
     ),
     // headline4
     headlineMedium: defaultStyle.headlineMedium!.copyWith(
-      color: CustomAppColors.white,
+      color: const Color(0xFFF5EDE8),
     ),
     // headline5
     headlineSmall: defaultStyle.headlineSmall!.copyWith(
-      color: CustomAppColors.white,
+      color: const Color(0xFFF5EDE8),
     ),
     // headline6
-    titleLarge: defaultStyle.titleLarge!.copyWith(color: CustomAppColors.white),
-    // bodyText1
-    bodyLarge: defaultStyle.bodyLarge!.copyWith(color: CustomAppColors.white),
-    // bodyText2
-    bodyMedium: defaultStyle.bodyMedium!.copyWith(color: CustomAppColors.white),
-    labelLarge: defaultStyle.labelLarge!.copyWith(color: CustomAppColors.white),
-    labelMedium: defaultStyle.labelMedium!.copyWith(
-      color: CustomAppColors.white,
+    titleLarge: defaultStyle.titleLarge!.copyWith(
+      color: const Color(0xFFF5EDE8),
     ),
-    labelSmall: defaultStyle.labelSmall!.copyWith(color: CustomAppColors.white),
+    // bodyText1
+    bodyLarge: defaultStyle.bodyLarge!.copyWith(color: const Color(0xFFF5EDE8)),
+    // bodyText2
+    bodyMedium: defaultStyle.bodyMedium!.copyWith(
+      color: const Color(0xFFF5EDE8),
+    ),
+    labelLarge: defaultStyle.labelLarge!.copyWith(
+      color: const Color(0xFFF5EDE8),
+    ),
+    labelMedium: defaultStyle.labelMedium!.copyWith(
+      color: const Color(0xFFF5EDE8),
+    ),
+    labelSmall: defaultStyle.labelSmall!.copyWith(
+      color: const Color(0xFFF5EDE8),
+    ),
   );
 }

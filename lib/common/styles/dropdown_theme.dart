@@ -9,28 +9,33 @@ class DropdownThemes {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       filled: true,
-      fillColor: Colors.white,
+      fillColor: const Color(0xFFFFFBF8),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10), // Rounded corners
-        borderSide: BorderSide(color: Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: CustomAppColors.gray4),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: CustomAppColors.gray4),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.grey.shade600),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: CustomAppColors.primary, width: 2),
       ),
     ),
-    textStyle: const TextStyle(fontSize: 16, color: Colors.black),
+    textStyle: const TextStyle(
+      fontSize: 16,
+      color: CustomAppColors.primaryText,
+    ),
     menuStyle: MenuStyle(
-      backgroundColor: WidgetStateProperty.all(Colors.white),
-      elevation: WidgetStateProperty.all(0),
+      backgroundColor: WidgetStateProperty.all(const Color(0xFFFFFBF8)),
+      elevation: WidgetStateProperty.all(2),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      side: WidgetStateProperty.all(BorderSide(color: Colors.grey.shade400)),
+      side: WidgetStateProperty.all(
+        const BorderSide(color: CustomAppColors.gray4),
+      ),
     ),
   );
 
