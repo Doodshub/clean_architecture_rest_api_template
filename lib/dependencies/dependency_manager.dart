@@ -66,7 +66,11 @@ extension GetItExtension on GetIt {
 class DependencyManager {
   bool initialized = false;
 
-  DependencyManager() {
+  // Database configuration (can be set by consuming apps)
+  String? databaseName;
+  int databaseVersion;
+
+  DependencyManager({this.databaseName, this.databaseVersion = 1}) {
     // Helpers
     provideLogger();
     provideRouteHelper();
@@ -216,14 +220,17 @@ class DependencyManager {
   Future<void> provideLocalDatabase() async {
     final appDir = await getApplicationDocumentsDirectory();
     await appDir.create(recursive: true);
-    sl<Logger>().i({"Creating database"});
 
-    /// Use the database name from the environment
-    // final databasePath = p.join(appDir.path, sl<AppEnvironment>().databaseName ?? "");
-    final databasePath = p.join(appDir.path, "templateapp");
+    // Use provided database name, fallback to environment, then default
+    final dbName =
+        databaseName ?? sl<AppEnvironment>().databaseName ?? "templateapp";
+
+    sl<Logger>().i({"Creating database: $dbName (v$databaseVersion)"});
+
+    final databasePath = p.join(appDir.path, dbName);
     final database = await databaseFactoryIo.openDatabase(
       databasePath,
-      version: 1,
+      version: databaseVersion,
     );
 
     sl.registerSingleton<Database>(database);

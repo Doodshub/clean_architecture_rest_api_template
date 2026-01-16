@@ -3,21 +3,29 @@ import 'dart:collection';
 import 'package:clean_architecture_template/common/routes/route_helper.dart';
 import 'package:flutter/cupertino.dart';
 
+/// Router for authenticated app routes
+///
+/// Consumers should register their authenticated routes via addRoute().
+///
+/// Example:
+/// ```dart
+/// final mainRouter = sl<MainRouter>();
+/// mainRouter.addRoute('home', ({settings}) =>
+///   CupertinoPageRoute(builder: (_) => HomeScreen())
+/// );
+/// mainRouter.addRoute('profile', ({settings}) =>
+///   CupertinoPageRoute(builder: (_) => ProfileScreen())
+/// );
+/// ```
 class MainRouter implements AppRouter {
   @override
   String get name => "main";
 
   final GlobalKey<NavigatorState> key = GlobalKey();
 
-  // Indicate route endpoints here
-  static const String base = '/';
-  static const String home = 'home';
-
+  // Routes are empty by default - consumers must register routes
   final LinkedHashMap<String, RouteBuilder> routes =
-      LinkedHashMap.from(<String, RouteBuilder>{
-        base: ({settings}) => _buildRoute(const SizedBox(), settings: settings),
-        home: ({settings}) => _buildRoute(const SizedBox(), settings: settings),
-      });
+      LinkedHashMap<String, RouteBuilder>();
 
   /// Add a custom route to this router.
   ///
@@ -37,7 +45,7 @@ class MainRouter implements AppRouter {
     final route = routes[settings.name];
     assert(
       route != null,
-      "Route '\${settings.name}' is not declared in MainRouter",
+      "Route '${settings.name}' is not declared in MainRouter",
     );
     return route!(settings: settings);
   }

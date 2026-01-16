@@ -1,7 +1,4 @@
-import 'package:clean_architecture_template/common/routes/main_router.dart';
-import 'package:clean_architecture_template/common/routes/onboarding_router.dart';
-import 'package:clean_architecture_template/common/routes/root_router.dart';
-import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/clean_architecture_template.dart';
 import 'package:flutter/material.dart';
 
 typedef RouteBuilder = Route<dynamic> Function({RouteSettings? settings});
@@ -61,12 +58,29 @@ class RouteHelper {
 
   /// MAIN routes
   /// ************************************************************
-  void navigateToBaseScreen() {
-    mainRouter.key.currentState?.pushReplacementNamed(MainRouter.base);
+
+  /// Navigate to any registered route in the MainRouter
+  ///
+  /// Example:
+  /// ```dart
+  /// sl<RouteHelper>().navigate(AppRoutes.bibleReader);
+  /// sl<RouteHelper>().navigate('/profile', arguments: user);
+  /// ```
+  void navigate(String routeName, {Object? arguments}) {
+    mainRouter.key.currentState?.pushNamed(routeName, arguments: arguments);
   }
 
-  void showHomeScreen() {
-    mainRouter.key.currentState?.pushNamed(MainRouter.home);
+  /// Navigate and replace the current route
+  ///
+  /// Example:
+  /// ```dart
+  /// sl<RouteHelper>().navigateAndReplace(AppRoutes.home);
+  /// ```
+  void navigateAndReplace(String routeName, {Object? arguments}) {
+    mainRouter.key.currentState?.pushReplacementNamed(
+      routeName,
+      arguments: arguments,
+    );
   }
 
   void popToPreviousPage({dynamic result}) {
@@ -78,17 +92,5 @@ class RouteHelper {
   // defaults
   void popMainToRoot() {
     mainRouter.key.currentState?.popUntil((route) => route.isFirst);
-  }
-
-  /// ONBOARDING routes
-  /// ************************************************************
-  ///
-
-  void showLoginScreen() {
-    onboardingRouter.key.currentState?.pushNamed(OnboardingRouter.login);
-  }
-
-  void showRegisterScreen() {
-    onboardingRouter.key.currentState?.pushNamed(OnboardingRouter.register);
   }
 }

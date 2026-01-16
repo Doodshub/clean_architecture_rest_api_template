@@ -28,10 +28,11 @@ export 'dependencies/authenticated_dependency_provider.dart';
 export 'dependencies/auth_interceptor.dart';
 
 // Routing
-export 'common/routes/route_helper.dart';
+export 'common/routes/root_router.dart';
 export 'common/routes/main_router.dart';
 export 'common/routes/onboarding_router.dart';
-export 'common/routes/root_router.dart';
+export 'common/routes/route_helper.dart';
+export 'common/routes/route_configuration.dart';
 
 // Database
 export 'data/database/database_service.dart';
