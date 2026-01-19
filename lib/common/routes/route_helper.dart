@@ -3,36 +3,6 @@ import 'package:flutter/material.dart';
 
 typedef RouteBuilder = Route<dynamic> Function({RouteSettings? settings});
 
-/// Abstract base class for all routers in the application.
-///
-/// Extend this class to create custom routers in your consuming app.
-///
-/// Example:
-/// ```dart
-/// class ProductRouter implements AppRouter {
-///   @override
-///   String get name => "product";
-///
-///   final GlobalKey<NavigatorState> key = GlobalKey();
-///   static const String list = 'list';
-///   static const String detail = 'detail';
-///
-///   final LinkedHashMap<String, RouteBuilder> routes = LinkedHashMap.from({
-///     list: ({settings}) => CupertinoPageRoute(builder: (_) => ProductListScreen()),
-///     detail: ({settings}) => CupertinoPageRoute(builder: (_) => ProductDetailScreen()),
-///   });
-///
-///   void addRoute(String name, RouteBuilder builder) {
-///     routes[name] = builder;
-///   }
-///
-///   Route getRoute(RouteSettings settings) {
-///     final route = routes[settings.name];
-///     assert(route != null, "Route $name is not declared in ${this.name}");
-///     return route!(settings: settings);
-///   }
-/// }
-/// ```
 abstract class AppRouter {
   String get name;
 

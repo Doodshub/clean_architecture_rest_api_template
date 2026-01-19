@@ -73,7 +73,7 @@ class DependencyManager {
   DependencyManager({this.databaseName, this.databaseVersion = 1}) {
     // Helpers
     provideLogger();
-    provideRouteHelper();
+    // provideRouteHelper();
     provideDIO();
     provideModalService();
 
@@ -84,9 +84,9 @@ class DependencyManager {
     provideGlobalAppBloc();
 
     // Routes
-    provideMainRouter();
-    provideRootRouter();
-    provideOnboardingRouter();
+    // provideMainRouter();
+    // provideRootRouter();
+    // provideOnboardingRouter();
 
     // Repositories
     provideRepositories();
@@ -222,8 +222,7 @@ class DependencyManager {
     await appDir.create(recursive: true);
 
     // Use provided database name, fallback to environment, then default
-    final dbName =
-        databaseName ?? sl<AppEnvironment>().databaseName ?? "templateapp";
+    final dbName = databaseName ?? sl<AppEnvironment>().databaseName;
 
     sl<Logger>().i({"Creating database: $dbName (v$databaseVersion)"});
 

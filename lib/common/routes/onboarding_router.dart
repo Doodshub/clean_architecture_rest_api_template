@@ -22,6 +22,22 @@ class OnboardingRouter implements AppRouter {
     routes[routeName] = builder;
   }
 
+  /// Convenience method to add a widget-based route
+  void addWidgetRoute(
+    String routeName,
+    Widget Function(RouteSettings settings) builder, {
+    bool fullScreenDialog = false,
+  }) {
+    addRoute(
+      routeName,
+      ({RouteSettings? settings}) => _buildRoute(
+        builder(settings!),
+        settings: settings,
+        fullScreenDialog: fullScreenDialog,
+      ),
+    );
+  }
+
   /// The route being passed in [Navigator]'s onGenerateRoute
   Route getRoute(RouteSettings settings) {
     final route = routes[settings.name];

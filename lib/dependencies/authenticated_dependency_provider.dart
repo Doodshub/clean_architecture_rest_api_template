@@ -37,6 +37,11 @@ class AuthenticatedDependencyProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // If no additional providers, just return the child directly
+    if (additionalProviders.isEmpty) {
+      return child;
+    }
+
     return MultiProvider(
       providers: [
         /// Add any providers that are needed for the authenticated part of the app.

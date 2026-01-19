@@ -1,33 +1,6 @@
 import 'package:clean_architecture_template/clean_architecture_template.dart';
 import 'package:flutter/cupertino.dart';
 
-/// Configuration class for bulk route registration
-///
-/// Simplifies registering multiple routes across different routers.
-///
-/// Example:
-/// ```dart
-/// final config = RouteConfiguration(
-///   authenticatedRoutes: {
-///     'home': (context) => HomeScreen(),
-///     'profile': (context) => ProfileScreen(),
-///     'settings': (context) => SettingsScreen(),
-///   },
-///   unauthenticatedRoutes: {
-///     'login': (context) => LoginScreen(),
-///     'register': (context) => RegisterScreen(),
-///   },
-///   rootRoutes: {
-///     'error': (context) => ErrorScreen(),
-///   },
-/// );
-///
-/// config.registerAllRoutes(
-///   mainRouter: sl<MainRouter>(),
-///   onboardingRouter: sl<OnboardingRouter>(),
-///   rootRouter: sl<RootRouter>(),
-/// );
-/// ```
 class RouteConfiguration {
   final Map<String, Widget Function(BuildContext)> authenticatedRoutes;
   final Map<String, Widget Function(BuildContext)> unauthenticatedRoutes;

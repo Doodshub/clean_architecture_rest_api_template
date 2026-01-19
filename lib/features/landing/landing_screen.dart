@@ -89,9 +89,10 @@ class _LandingScreenState extends State<LandingScreen> {
         return BlocConsumer<AuthenticationBloc, AuthenticationState>(
           listenWhen: (previous, current) => previous != current,
           listener: (context, state) {
-            sl<Logger>().i('AuthenticationBloc state: ${state.user}');
-            if (state.user != null) {
-              return;
+            if (sl.isRegistered<Logger>()) {
+              sl<Logger>().i(
+                'Authentication state changed: user=${state.user?.id}',
+              );
             }
           },
           builder: (context, state) {
