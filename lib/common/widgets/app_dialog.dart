@@ -17,7 +17,7 @@ class AppDialog extends StatelessWidget {
     this.onCancelClick,
     this.cancelButtonTitle,
     this.buttonWidth,
-    this.borderRadius = 10,
+    this.borderRadius = 20,
   });
 
   final String? title;

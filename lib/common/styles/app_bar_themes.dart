@@ -22,7 +22,7 @@ class AppBarThemes {
     elevation: 0,
     iconTheme: IconThemes.darkStyle,
     titleTextStyle: TextStyle(
-      color: Color(0xFFF5EDE8),
+      color: CustomAppColors.gray6,
       fontSize: 28,
       fontWeight: FontWeight.w600,
     ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:clean_architecture_template/common/styles/app_colors.dart';
 
 class ListTileThemes {
   const ListTileThemes._();
 
   static const defaultStyle = ListTileThemeData(
-    tileColor: Color(0xFFFFFBF8),
+    tileColor: CustomAppColors.white,
     contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
   );
 
   static final roundedStyle = ListTileThemeData(
-    tileColor: const Color(0xFFFFFBF8),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    tileColor: CustomAppColors.white,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
   );
 }

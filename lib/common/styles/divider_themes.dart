@@ -11,7 +11,7 @@ class DividerThemes {
   );
 
   static const darkStyle = DividerThemeData(
-    color: Color(0xFF6B5E5E),
+    color: CustomAppColors.gray2,
     thickness: 1.0,
     space: 16.0,
   );

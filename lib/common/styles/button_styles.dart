@@ -24,7 +24,7 @@ class ButtonStyles {
       return CustomAppColors.primaryVariant;
     }),
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
-      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
+      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
     }),
     elevation: WidgetStateProperty.resolveWith<double>((states) {
       if (states.contains(WidgetState.pressed)) {
@@ -52,11 +52,11 @@ class ButtonStyles {
   static ButtonStyle whiteBordered = white.copyWith(
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
       if (states.contains(WidgetState.pressed)) {
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
+        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
       }
 
       return RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         side: const BorderSide(color: CustomAppColors.primary, width: 1.2),
       );
     }),
@@ -65,18 +65,18 @@ class ButtonStyles {
   static ButtonStyle greenBordered = white.copyWith(
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
       if (states.contains(WidgetState.pressed)) {
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
+        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
       }
 
       if (states.contains(WidgetState.disabled)) {
         return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           side: const BorderSide(color: Colors.transparent, width: 1.2),
         );
       }
 
       return RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         side: const BorderSide(color: CustomAppColors.success, width: 1.2),
       );
     }),
@@ -84,11 +84,11 @@ class ButtonStyles {
   static ButtonStyle yellowBordered = white.copyWith(
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
       if (states.contains(WidgetState.pressed)) {
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
+        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
       }
 
       return RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         side: const BorderSide(color: CustomAppColors.warning, width: 1.2),
       );
     }),
@@ -102,7 +102,7 @@ class ButtonStyles {
     }),
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
       return RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         side: const BorderSide(color: CustomAppColors.white, width: 1),
       );
     }),

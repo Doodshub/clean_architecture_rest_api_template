@@ -23,7 +23,7 @@ class SquareShapeButtonWidget extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           /// square radius
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: CustomAppColors.primary),
         ),
         child: Row(

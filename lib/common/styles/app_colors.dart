@@ -8,49 +8,68 @@ extension BuildContextColorExtension on BuildContext {
 class CustomAppColors {
   const CustomAppColors._();
 
-  static const primary = Color(0xFF5C8D89);
+  static const primary = Color(0xFF5B67CA);
 
-  static const primaryVariant = Color(0xFF4A7471);
+  static const primaryVariant = Color(0xFF4854B2);
 
-  static const secondary = Color(0xFF8BB5B1);
+  static const secondary = Color(0xFF8B95E8);
 
-  static const secondaryVariant = Color(0xFF72A09C);
+  static const secondaryVariant = Color(0xFF7682D6);
 
   static const white = Color(0xFFFFFFFF);
 
-  static const primaryBackground = Color(0xFFF5F9F8);
+  static const primaryBackground = Color(0xFFF5F4F8);
 
-  static const secondaryBackground = Color(0xFFEDF4F3);
+  static const secondaryBackground = Color(0xFFE8E4F3);
 
-  static const primaryText = Color(0xFF1F2D2C);
+  static const primaryText = Color(0xFF2D3142);
 
-  static const secondaryText = Color(0xFF5A6665);
+  static const secondaryText = Color(0xFF6B6E82);
 
-  static const gray1 = Color(0xFF2C3A39);
+  static const gray1 = Color(0xFF2D3142);
 
-  static const gray2 = Color(0xFF778988);
+  static const gray2 = Color(0xFF6B6E82);
 
-  static const gray3 = Color(0xFF95A5A4);
+  static const gray3 = Color(0xFF9CA0B3);
 
-  static const gray4 = Color(0xFFC4D0CF);
+  static const gray4 = Color(0xFFD1D4E0);
 
-  static const gray5 = Color(0xFFE5EDED);
+  static const gray5 = Color(0xFFE8EAF0);
 
-  static const gray6 = Color(0xFFF3F7F6);
+  static const gray6 = Color(0xFFF5F6FA);
 
-  static const error = Color(0xFFD87676);
+  static const error = Color(0xFFE85D75);
 
-  static const alert = Color(0xFFC86868);
+  static const alert = Color(0xFFD9455A);
 
-  static const success = Color(0xFF5C8D89);
+  static const success = Color(0xFF4CAF50);
 
-  static const warning = Color(0xFFE8C488);
+  static const warning = Color(0xFFFFB74D);
 
-  static const darkScaffold = Color(0xFF1F2D2C);
+  static const darkScaffold = Color(0xFF1A1D2E);
 
-  static const darkPrimary = Color(0xFF2C3A39);
+  static const darkPrimary = Color(0xFF2D3142);
 
-  static const darkCards = Color(0xFF3A4847);
+  static const darkCards = Color(0xFF3F4356);
+
+  // Additional theme colors
+  static const tertiary = Color(0xFF9C8ADE);
+
+  static const tertiaryLight = Color(0xFFB5A8E8);
+
+  static const tertiaryDark = Color(0xFF7D6FC9);
+
+  static const primaryContainerLight = Color(0xFFE8E4F3);
+
+  static const tertiaryContainer = Color(0xFFEDE9F7);
+
+  static const errorContainer = Color(0xFFFFEBEE);
+
+  static const errorContainerDark = Color(0xFF8A3A3A);
+
+  static const errorDark = Color(0xFFEF9A9A);
+
+  static const onErrorContainer = Color(0xFF5A1F24);
 }
 
 class AppColors extends ThemeExtension<AppColors> {
@@ -83,58 +102,58 @@ class AppColors extends ThemeExtension<AppColors> {
 
   factory AppColors.defaultStyle() {
     return const AppColors(
-      text: Color(0xFF1F2D2C),
-      secondaryText: Color(0xFF5A6665),
-      accentText: Color(0xFFC4D0CF),
+      text: Color(0xFF2D3142),
+      secondaryText: Color(0xFF6B6E82),
+      accentText: Color(0xFFD1D4E0),
       textOnColour: Color(0xFFFFFFFF),
-      link: Color(0xFF5C8D89),
-      secondaryTextOnColour: Color(0xFFF5F9F8),
-      placeholder: Color(0xFF95A5A4),
-      disabledText: Color(0xFFC4D0CF),
-      successText: Color(0xFF4A7471),
-      attentionText: Color(0xFFCA9A6A),
-      warningText: Color(0xFFD87676),
-      neutralText: Color(0xFF778988),
-      tappable: Color(0xFF5C8D89),
-      accent: Color(0xFFE5EDED),
+      link: Color(0xFF5B67CA),
+      secondaryTextOnColour: Color(0xFFF5F4F8),
+      placeholder: Color(0xFF9CA0B3),
+      disabledText: Color(0xFFD1D4E0),
+      successText: Color(0xFF388E3C),
+      attentionText: Color(0xFFEF6C00),
+      warningText: Color(0xFFE85D75),
+      neutralText: Color(0xFF6B6E82),
+      tappable: Color(0xFF5B67CA),
+      accent: Color(0xFFE8EAF0),
       foreground: Color(0xFFFFFFFF),
-      background: Color(0xFFF5F9F8),
-      divider: Color(0xFFC4D0CF),
-      disabled: Color(0xFFE5EDED),
-      success: Color(0xFF5C8D89),
-      attention: Color(0xFFE8C488),
-      warning: Color(0xFFD87676),
-      neutral: Color(0xFF95A5A4),
-      information: Color(0xFF5C8D89),
+      background: Color(0xFFF5F4F8),
+      divider: Color(0xFFD1D4E0),
+      disabled: Color(0xFFE8EAF0),
+      success: Color(0xFF4CAF50),
+      attention: Color(0xFFFFB74D),
+      warning: Color(0xFFE85D75),
+      neutral: Color(0xFF9CA0B3),
+      information: Color(0xFF5B67CA),
       scrim: Color(0x99000000),
     );
   }
 
   factory AppColors.dark() {
     return const AppColors(
-      text: Color(0xFFEDF4F3),
-      secondaryText: Color(0xFFB4C5C4),
-      accentText: Color(0xFFD0E0DF),
-      textOnColour: Color(0xFF1F2D2C),
-      link: Color(0xFF8BB5B1),
-      secondaryTextOnColour: Color(0xFF2C3A39),
-      placeholder: Color(0xFF778988),
-      disabledText: Color(0xFF5A6665),
-      successText: Color(0xFF8BB5B1),
-      attentionText: Color(0xFFE6D4A8),
-      warningText: Color(0xFFE89C9C),
-      neutralText: Color(0xFFB4C5C4),
-      tappable: Color(0xFF8BB5B1),
-      accent: Color(0xFF5A6665),
-      foreground: Color(0xFF3A4847),
-      background: Color(0xFF1F2D2C),
-      divider: Color(0xFF5A6665),
-      disabled: Color(0xFF3A4847),
-      success: Color(0xFF8BB5B1),
-      attention: Color(0xFFE6D4A8),
-      warning: Color(0xFFE89C9C),
-      neutral: Color(0xFF95A5A4),
-      information: Color(0xFF8BB5B1),
+      text: Color(0xFFF5F6FA),
+      secondaryText: Color(0xFFD1D4E0),
+      accentText: Color(0xFFE8EAF0),
+      textOnColour: Color(0xFF1A1D2E),
+      link: Color(0xFF8B95E8),
+      secondaryTextOnColour: Color(0xFF2D3142),
+      placeholder: Color(0xFF9CA0B3),
+      disabledText: Color(0xFF6B6E82),
+      successText: Color(0xFF81C784),
+      attentionText: Color(0xFFFFCC80),
+      warningText: Color(0xFFEF9A9A),
+      neutralText: Color(0xFFD1D4E0),
+      tappable: Color(0xFF8B95E8),
+      accent: Color(0xFF6B6E82),
+      foreground: Color(0xFF3F4356),
+      background: Color(0xFF1A1D2E),
+      divider: Color(0xFF6B6E82),
+      disabled: Color(0xFF3F4356),
+      success: Color(0xFF81C784),
+      attention: Color(0xFFFFCC80),
+      warning: Color(0xFFEF9A9A),
+      neutral: Color(0xFF9CA0B3),
+      information: Color(0xFF8B95E8),
       scrim: Color(0xB3000000),
     );
   }

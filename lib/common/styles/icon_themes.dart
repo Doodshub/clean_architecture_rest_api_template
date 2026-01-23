@@ -6,5 +6,5 @@ class IconThemes {
 
   static const defaultStyle = IconThemeData(color: CustomAppColors.gray3);
 
-  static const darkStyle = IconThemeData(color: Color(0xFFF5EDE8));
+  static const darkStyle = IconThemeData(color: CustomAppColors.gray6);
 }

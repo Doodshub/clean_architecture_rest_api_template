@@ -9,17 +9,17 @@ class DropdownThemes {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       filled: true,
-      fillColor: const Color(0xFFFFFBF8),
+      fillColor: CustomAppColors.white,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: CustomAppColors.gray4),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: CustomAppColors.gray4),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: CustomAppColors.primary, width: 2),
       ),
     ),
@@ -28,10 +28,10 @@ class DropdownThemes {
       color: CustomAppColors.primaryText,
     ),
     menuStyle: MenuStyle(
-      backgroundColor: WidgetStateProperty.all(const Color(0xFFFFFBF8)),
+      backgroundColor: WidgetStateProperty.all(CustomAppColors.white),
       elevation: WidgetStateProperty.all(2),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       side: WidgetStateProperty.all(
         const BorderSide(color: CustomAppColors.gray4),

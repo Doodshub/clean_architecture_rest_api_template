@@ -5,7 +5,7 @@ class InputDecorationThemes {
   const InputDecorationThemes._();
 
   static final defaultStyle = InputDecorationTheme(
-    fillColor: const Color(0xFFFFFBF8),
+    fillColor: CustomAppColors.white,
     filled: true,
     contentPadding: const EdgeInsets.only(
       left: 12,
@@ -14,15 +14,15 @@ class InputDecorationThemes {
       bottom: 20,
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(16),
       borderSide: const BorderSide(color: CustomAppColors.gray4, width: 1),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(16),
       borderSide: const BorderSide(color: CustomAppColors.gray4, width: 1),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(16),
       borderSide: const BorderSide(color: CustomAppColors.primary, width: 2),
     ),
   );

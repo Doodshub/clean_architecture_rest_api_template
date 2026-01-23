@@ -23,7 +23,7 @@ class AppThemes {
     cupertinoOverrideTheme: const CupertinoThemeData(
       brightness: Brightness.light,
     ),
-    fontFamily: 'Lora',
+    fontFamily: 'Inter',
     visualDensity: VisualDensity.standard,
     bannerTheme: const MaterialBannerThemeData(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
@@ -53,21 +53,21 @@ class AppThemes {
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    splashColor: const Color(0xFFB8A0B0).withAlpha(30),
+    splashColor: CustomAppColors.secondary.withAlpha(30),
     primaryColor: CustomAppColors.darkPrimary,
-    highlightColor: const Color(0xFFC88A8A).withAlpha(30),
+    highlightColor: CustomAppColors.secondaryVariant.withAlpha(30),
     scaffoldBackgroundColor: CustomAppColors.darkScaffold,
     cardColor: CustomAppColors.darkCards,
     cupertinoOverrideTheme: const CupertinoThemeData(
       brightness: Brightness.dark,
     ),
-    fontFamily: 'Lora',
+    fontFamily: 'Inter',
     visualDensity: VisualDensity.standard,
     bannerTheme: const MaterialBannerThemeData(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: CustomAppColors.darkCards,
-      selectedIconTheme: IconThemeData(color: Color(0xFFF5EDE8)),
-      unselectedIconTheme: IconThemeData(color: Color(0xFFCBBAB4)),
+      selectedIconTheme: IconThemeData(color: CustomAppColors.gray6),
+      unselectedIconTheme: IconThemeData(color: CustomAppColors.gray4),
     ),
     dialogTheme: DialogThemeData(
       backgroundColor: CustomAppColors.darkCards,

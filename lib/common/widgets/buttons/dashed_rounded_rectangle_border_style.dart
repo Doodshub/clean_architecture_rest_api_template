@@ -17,7 +17,7 @@ class DashedBorderPainter extends CustomPainter {
 
     final RRect outer = RRect.fromRectAndRadius(
       Offset.zero & size,
-      const Radius.circular(8),
+      const Radius.circular(16),
     );
 
     final Path path = Path()..addRRect(outer);
