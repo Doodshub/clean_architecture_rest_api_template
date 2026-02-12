@@ -1,53 +1,18 @@
 part of 'authentication_bloc.dart';
 
 class AuthenticationState extends BlocState {
-  final bool? isLoggingIn;
-  final bool? isRegisteringUser;
   final BaseUser? user;
-  final Exception? error;
-  final bool? isFetchingUser;
 
-  const AuthenticationState({
-    this.isLoggingIn,
-    this.isRegisteringUser,
-    this.user,
-    this.error,
-    this.isFetchingUser,
-  });
+  const AuthenticationState({this.user});
 
   @override
-  List<Object?> get props => [
-    isLoggingIn,
-    isRegisteringUser,
-    user,
-    error,
-    isFetchingUser,
-  ];
+  List<Object?> get props => [user];
 
-  AuthenticationState copyWith({
-    bool? isLoggingIn,
-    bool? isRegisteringUser,
-    BaseUser? user,
-    bool? isIntentToLogout,
-    Exception? error,
-    bool? isFetchingUser,
-  }) {
-    return AuthenticationState(
-      isLoggingIn: isLoggingIn ?? this.isLoggingIn,
-      isRegisteringUser: isRegisteringUser ?? this.isRegisteringUser,
-      user: user ?? this.user,
-      error: error ?? this.error,
-      isFetchingUser: isFetchingUser ?? this.isFetchingUser,
-    );
+  AuthenticationState copyWith({BaseUser? user}) {
+    return AuthenticationState(user: user ?? this.user);
   }
 
   factory AuthenticationState.initial() {
-    return const AuthenticationState(
-      isLoggingIn: false,
-      isRegisteringUser: false,
-      user: null,
-      error: null,
-      isFetchingUser: false,
-    );
+    return const AuthenticationState(user: null);
   }
 }

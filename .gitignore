@@ -47,7 +47,3 @@ app.*.map.json
 # Code generation files - not committed to package
 *.freezed.dart
 *.g.dart
-lib/env/env.g.dart
-
-# Environment files
-.env

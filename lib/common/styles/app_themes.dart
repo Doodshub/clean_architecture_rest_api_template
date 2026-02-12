@@ -23,7 +23,7 @@ class AppThemes {
     cupertinoOverrideTheme: const CupertinoThemeData(
       brightness: Brightness.light,
     ),
-    fontFamily: 'Inter',
+    fontFamily: 'Figtree',
     visualDensity: VisualDensity.standard,
     bannerTheme: const MaterialBannerThemeData(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
@@ -61,7 +61,7 @@ class AppThemes {
     cupertinoOverrideTheme: const CupertinoThemeData(
       brightness: Brightness.dark,
     ),
-    fontFamily: 'Inter',
+    fontFamily: 'Figtree',
     visualDensity: VisualDensity.standard,
     bannerTheme: const MaterialBannerThemeData(),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -78,6 +78,7 @@ class AppThemes {
     textTheme: TextThemes.darkStyle,
     iconTheme: IconThemes.darkStyle,
     appBarTheme: AppBarThemes.darkStyle,
+    inputDecorationTheme: InputDecorationThemes.darkStyle,
     extensions: [AppColors.dark()],
     colorScheme: ColorSchemes.darkStyle.copyWith(brightness: Brightness.dark),
   );

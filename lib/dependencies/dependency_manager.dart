@@ -1,230 +1,159 @@
 import 'package:clean_architecture_template/blocs/app/app_bloc.dart';
-import 'package:clean_architecture_template/common/routes/main_router.dart';
-import 'package:clean_architecture_template/common/routes/onboarding_router.dart';
-import 'package:clean_architecture_template/common/routes/root_router.dart';
-import 'package:clean_architecture_template/common/routes/route_helper.dart';
 import 'package:clean_architecture_template/common/services/modal_service.dart';
 import 'package:clean_architecture_template/common/services/user_service.dart';
 import 'package:clean_architecture_template/common/utils/app_logger.dart';
 import 'package:clean_architecture_template/data/database/database_service.dart';
-import 'package:clean_architecture_template/data/repositories/authentication_repository.dart';
-import 'package:clean_architecture_template/dependencies/auth_interceptor.dart';
-import 'package:clean_architecture_template/env/env.dart';
 import 'package:clean_architecture_template/models/app_environment.dart';
 import 'package:clean_architecture_template/services/token_service.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
-import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Global dependency locator used across the codebase
-GetIt sl = GetIt.I;
+// ═══════════════════════════════════════════════════════════════════════════
+// Service Locator
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// Global dependency locator used across the codebase.
+///
+/// Usage: `sl<MyService>()` or `sl.get<MyService>()`
+final GetIt sl = GetIt.I;
 
 extension GetItExtension on GetIt {
   Future<void> ensureReady<T extends Object>() async {
     try {
       await isReady<T>();
     } on Exception catch (e) {
-      debugPrint("ensureReady caught exception $e");
+      debugPrint('ensureReady caught exception: $e');
     }
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// Dependency Manager
+// ═══════════════════════════════════════════════════════════════════════════
+
 /// Central dependency manager for the application.
 ///
-/// This class manages all dependency injection using GetIt.
-/// Consuming apps can extend this to register additional dependencies.
+/// Manages all dependency injection using GetIt. Consuming apps should create
+/// an instance, configure it, and call [init()] before use.
 ///
-/// Example:
+/// ## Registration Order (in constructor)
+/// 1. **Core** — Logger, ModalService
+/// 2. **Environment** — AppEnvironment (env, flavor, appName, databaseName)
+/// 3. **Blocs** — AppBloc
+/// 4. **Storage** — SharedPreferences, FlutterSecureStorage, TokenService
+/// 5. **Database** — DatabaseService, UserService (via [provideLocalDatabase])
+///
+/// ## Consuming App Responsibilities
+/// - Create [DependencyManager] with config (databaseName, env, etc.)
+/// - Call [provideLocalDatabase] before repositories that need it
+/// - Provide Dio (consuming apps register their own HTTP client)
+/// - Register app-specific repositories, services, blocs
+/// - Call [init] to await async dependencies
+///
+/// ## Example
 /// ```dart
-/// final dependencyManager = DependencyManager();
-///
-/// // Register custom repositories
-/// dependencyManager.registerRepository<ProductRepository>(
-///   () => ProductRepository(dio: sl<Dio>()),
+/// final dm = DependencyManager(
+///   databaseName: 'my_app.db',
+///   databaseVersion: 1,
+///   env: 'dev',
+///   flavor: 'dev',
+///   appName: 'My App',
 /// );
-///
-/// // Register custom services
-/// dependencyManager.registerService<NotificationService>(
-///   () => NotificationService(),
-/// );
-///
-/// // Register custom blocs
-/// dependencyManager.registerBloc<ProductBloc>(
-///   () => ProductBloc(),
-/// );
-///
-/// await dependencyManager.init();
+/// await dm.provideLocalDatabase();
+/// // Register Dio, repositories, etc.
+/// await dm.init();
 /// ```
 class DependencyManager {
   bool initialized = false;
 
-  // Database configuration (can be set by consuming apps)
-  String? databaseName;
-  int databaseVersion;
+  // ─── Configuration ─────────────────────────────────────────────────────
 
-  DependencyManager({this.databaseName, this.databaseVersion = 1}) {
-    // Helpers
-    provideLogger();
-    // provideRouteHelper();
-    provideDIO();
-    provideModalService();
+  /// Database file name (e.g., `my_app.db`).
+  final String? databaseName;
 
-    // App Environment
-    provideEnvironment();
+  /// Database schema version for migrations.
+  final int databaseVersion;
 
-    /// Global Blocs
-    provideGlobalAppBloc();
+  /// Environment identifier (e.g., `dev`, `staging`, `prod`).
+  final String? env;
 
-    // Routes
-    // provideMainRouter();
-    // provideRootRouter();
-    // provideOnboardingRouter();
+  /// Build flavor (e.g., `free`, `paid`).
+  final String? flavor;
 
-    // Repositories
-    provideRepositories();
+  /// Application display name.
+  final String? appName;
 
-    // Databases
-    provideSharedPreferences();
-    // provideLocalDatabase();
-    provideDatabaseService();
-    provideUserService();
-    provideFlutterSecureStorage();
+  // ─── Constructor ──────────────────────────────────────────────────────
 
-    sl<Logger>().i({"Initialized"});
+  DependencyManager({
+    this.databaseName,
+    this.databaseVersion = 1,
+    this.env,
+    this.flavor,
+    this.appName,
+  }) {
+    _provideCore();
+    _provideEnvironment();
+    _provideBlocs();
+    _provideStorage();
+    _provideDatabaseServices();
+
+    sl<Logger>().i({'DependencyManager': 'Core dependencies registered'});
   }
 
-  /// Register a custom repository.
-  /// Call this before calling init().
-  ///
-  /// Example:
-  /// ```dart
-  /// dependencyManager.registerRepository<ProductRepository>(
-  ///   () => ProductRepository(dio: sl<Dio>()),
-  /// );
-  /// ```
-  void registerRepository<T extends Object>(T Function() factoryFunc) {
-    sl.registerLazySingleton<T>(factoryFunc);
-  }
+  // ─── Lifecycle ─────────────────────────────────────────────────────────
 
-  /// Register a custom service.
-  /// Call this before calling init().
-  ///
-  /// Example:
-  /// ```dart
-  /// dependencyManager.registerService<NotificationService>(
-  ///   () => NotificationService(database: sl<DatabaseService>()),
-  /// );
-  /// ```
-  void registerService<T extends Object>(T Function() factoryFunc) {
-    sl.registerLazySingleton<T>(factoryFunc);
-  }
-
-  /// Register a custom bloc.
-  /// Call this before calling init().
-  ///
-  /// Example:
-  /// ```dart
-  /// dependencyManager.registerBloc<ProductBloc>(
-  ///   () => ProductBloc(repository: sl<ProductRepository>()),
-  /// );
-  /// ```
-  void registerBloc<T extends Object>(T Function() factoryFunc) {
-    sl.registerLazySingleton<T>(factoryFunc);
-  }
-
-  /// Register any custom singleton dependency.
-  /// Call this before calling init().
-  void registerSingleton<T extends Object>(T instance) {
-    sl.registerSingleton<T>(instance);
-  }
-
-  /// Register any custom lazy singleton dependency.
-  /// Call this before calling init().
-  void registerLazySingleton<T extends Object>(T Function() factoryFunc) {
-    sl.registerLazySingleton<T>(factoryFunc);
-  }
-
-  void provideDIO() {
-    // Register DIO
-    sl.registerLazySingleton<Dio>(() {
-      var dio = Dio();
-
-      String? baseUrl = EnvValues.baseUrl;
-
-      sl<Logger>().i({"URL: $baseUrl"});
-
-      bool willLog = false;
-
-      return dio
-        ..options = BaseOptions(
-          baseUrl: baseUrl,
-          receiveTimeout: const Duration(seconds: 60),
-          connectTimeout: const Duration(seconds: 60),
-        )
-        ..interceptors.add(
-          PrettyDioLogger(
-            requestHeader: willLog,
-            requestBody: willLog,
-            responseBody: willLog,
-            responseHeader: willLog,
-            error: true,
-            compact: true,
-            maxWidth: 90,
-          ),
-        )
-        ..interceptors.add(AuthInterceptor(dio));
-    });
-  }
-
+  /// Waits for all async dependencies to be ready. Call after registering
+  /// all dependencies and before using the app.
   Future<void> init() async {
     await sl.allReady();
-
     initialized = true;
   }
 
+  /// Resets all registered dependencies. Use for testing or cleanup.
   Future<void> dispose() async {
     await sl.reset();
   }
 
-  void provideEnvironment() {
-    sl<Logger>().i({"Creating ${EnvValues.env} database"});
-    sl.registerLazySingleton<AppEnvironment>(() {
-      return AppEnvironment(
-        env: EnvValues.env,
-        flavor: EnvValues.flavor,
-        appName: EnvValues.appName,
-        databaseName: EnvValues.databaseName,
-      );
-    });
-  }
+  // ─── Custom Registration API ──────────────────────────────────────────
 
-  void provideFlutterSecureStorage() async {
-    sl.registerLazySingleton<FlutterSecureStorage>(
-      () => const FlutterSecureStorage(),
-    );
+  /// Registers a repository as a lazy singleton.
+  void registerRepository<T extends Object>(T Function() factory) =>
+      sl.registerLazySingleton<T>(factory);
 
-    // Register TokenHelper
-    sl.registerLazySingleton<TokenService>(
-      () => TokenService(sl<FlutterSecureStorage>()),
-    );
-  }
+  /// Registers a service as a lazy singleton.
+  void registerService<T extends Object>(T Function() factory) =>
+      sl.registerLazySingleton<T>(factory);
 
+  /// Registers a bloc as a lazy singleton.
+  void registerBloc<T extends Object>(T Function() factory) =>
+      sl.registerLazySingleton<T>(factory);
+
+  /// Registers an existing instance as a singleton.
+  void registerSingleton<T extends Object>(T instance) =>
+      sl.registerSingleton<T>(instance);
+
+  /// Registers a factory as a lazy singleton.
+  void registerLazySingleton<T extends Object>(T Function() factory) =>
+      sl.registerLazySingleton<T>(factory);
+
+  // ─── Database (async, must be called explicitly) ────────────────────────
+
+  /// Registers the local database. Must be called before [init] and before
+  /// any code that depends on [DatabaseService] or [UserService].
   Future<void> provideLocalDatabase() async {
     final appDir = await getApplicationDocumentsDirectory();
     await appDir.create(recursive: true);
 
-    // Use provided database name, fallback to environment, then default
     final dbName = databaseName ?? sl<AppEnvironment>().databaseName;
-
-    sl<Logger>().i({"Creating database: $dbName (v$databaseVersion)"});
+    sl<Logger>().i({'Database': 'Creating $dbName (v$databaseVersion)'});
 
     final databasePath = p.join(appDir.path, dbName);
     final database = await databaseFactoryIo.openDatabase(
@@ -235,56 +164,42 @@ class DependencyManager {
     sl.registerSingleton<Database>(database);
   }
 
-  void provideDatabaseService() {
-    sl.registerLazySingleton(
-      () => DatabaseService(db: sl.get<Database>(), logger: sl.get<Logger>()),
-    );
-  }
+  // ─── Internal Providers ────────────────────────────────────────────────
 
-  void provideUserService() {
-    sl.registerLazySingleton(() => UserService(sl.get<DatabaseService>()));
-  }
-
-  void provideRouteHelper() {
-    sl.registerSingleton<RouteHelper>(RouteHelper());
-  }
-
-  void provideSharedPreferences() {
-    sl.registerSingletonAsync<SharedPreferences>(() async {
-      final sharedPreferences = await SharedPreferences.getInstance();
-
-      return sharedPreferences;
-    });
-  }
-
-  void provideMainRouter() {
-    sl.registerSingleton<MainRouter>(MainRouter());
-  }
-
-  void provideRootRouter() {
-    sl.registerSingleton<RootRouter>(RootRouter());
-  }
-
-  void provideLogger() {
+  void _provideCore() {
     sl.registerLazySingleton<Logger>(() => Logger(printer: AppLogger()));
-  }
-
-  void provideRepositories() {
-    /// AuthenticationRepository
-    sl.registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticationRepository(dio: sl<Dio>()),
-    );
-  }
-
-  void provideModalService() {
     sl.registerLazySingleton<ModalService>(ModalService.new);
   }
 
-  void provideOnboardingRouter() {
-    sl.registerSingleton<OnboardingRouter>(OnboardingRouter());
+  void _provideEnvironment() {
+    sl.registerLazySingleton<AppEnvironment>(() => AppEnvironment(
+          env: env ?? '',
+          flavor: flavor ?? '',
+          appName: appName ?? '',
+          databaseName: databaseName ?? '',
+        ));
   }
 
-  void provideGlobalAppBloc() {
+  void _provideBlocs() {
     sl.registerLazySingleton<AppBloc>(() => AppBloc());
+  }
+
+  void _provideStorage() {
+    sl.registerLazySingleton<FlutterSecureStorage>(
+      () => const FlutterSecureStorage(),
+    );
+    sl.registerLazySingleton<TokenService>(
+      () => TokenService(sl<FlutterSecureStorage>()),
+    );
+    sl.registerSingletonAsync<SharedPreferences>(
+      () => SharedPreferences.getInstance(),
+    );
+  }
+
+  void _provideDatabaseServices() {
+    sl.registerLazySingleton(
+      () => DatabaseService(db: sl.get<Database>(), logger: sl.get<Logger>()),
+    );
+    sl.registerLazySingleton(() => UserService(sl.get<DatabaseService>()));
   }
 }

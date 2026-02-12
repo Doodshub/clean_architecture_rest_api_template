@@ -8,19 +8,19 @@ extension BuildContextColorExtension on BuildContext {
 class CustomAppColors {
   const CustomAppColors._();
 
-  static const primary = Color(0xFF5B67CA);
+  static const primary = Color(0xFF1976D2);
 
-  static const primaryVariant = Color(0xFF4854B2);
+  static const primaryVariant = Color(0xFF1565C0);
 
-  static const secondary = Color(0xFF8B95E8);
+  static const secondary = Color(0xFF42A5F5);
 
-  static const secondaryVariant = Color(0xFF7682D6);
+  static const secondaryVariant = Color(0xFF2196F3);
 
   static const white = Color(0xFFFFFFFF);
 
-  static const primaryBackground = Color(0xFFF5F4F8);
+  static const primaryBackground = Color(0xFFFAFAFA);
 
-  static const secondaryBackground = Color(0xFFE8E4F3);
+  static const secondaryBackground = Color(0xFFE3F2FD);
 
   static const primaryText = Color(0xFF2D3142);
 
@@ -53,15 +53,15 @@ class CustomAppColors {
   static const darkCards = Color(0xFF3F4356);
 
   // Additional theme colors
-  static const tertiary = Color(0xFF9C8ADE);
+  static const tertiary = Color(0xFF64B5F6);
 
-  static const tertiaryLight = Color(0xFFB5A8E8);
+  static const tertiaryLight = Color(0xFF90CAF9);
 
-  static const tertiaryDark = Color(0xFF7D6FC9);
+  static const tertiaryDark = Color(0xFF42A5F5);
 
-  static const primaryContainerLight = Color(0xFFE8E4F3);
+  static const primaryContainerLight = Color(0xFFBBDEFB);
 
-  static const tertiaryContainer = Color(0xFFEDE9F7);
+  static const tertiaryContainer = Color(0xFFE1F5FE);
 
   static const errorContainer = Color(0xFFFFEBEE);
 

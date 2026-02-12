@@ -42,9 +42,6 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_secure_storage: ^9.2.4
 
-  # secrets
-  envied: ^1.1.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,7 +49,26 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.8.0
   build_runner: ^2.4.9
-  envied_generator: ^1.1.1
 
 flutter_intl:
   enabled: true
+
+flutter:
+  assets:
+    - assets/fonts/
+
+  fonts:
+    - family: Figtree
+      fonts:
+        - asset: assets/fonts/Figtree-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Figtree-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Figtree-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Figtree-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Figtree-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Figtree-Black.ttf
+          weight: 900

@@ -2,25 +2,6 @@ import 'package:clean_architecture_template/common/models/model.dart';
 
 /// Abstract base user class that all user models should extend.
 ///
-/// Consuming apps should create their own concrete user model extending this class.
-///
-/// Example:
-/// ```dart
-/// @freezed
-/// class AppUser extends BaseUser with _$AppUser {
-///   const factory AppUser({
-///     required int id,
-///     required String name,
-///     required bool isAuthenticated,
-///     String? email,  // Additional fields
-///     String? photoUrl,
-///   }) = _AppUser;
-///
-///   factory AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);
-///
-///   const AppUser._();
-/// }
-/// ```
 abstract class BaseUser extends Model {
   const BaseUser();
 

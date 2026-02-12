@@ -7,13 +7,13 @@ class ButtonStyles {
 
   static ButtonStyle defaultStyle = ButtonStyle(
     padding: WidgetStateProperty.resolveWith<EdgeInsets>((states) {
-      return const EdgeInsets.symmetric(horizontal: 27, vertical: 14);
+      return const EdgeInsets.symmetric(horizontal: 27, vertical: 16);
     }),
     textStyle: WidgetStateProperty.all(TextThemes.defaultStyle.labelLarge),
     foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
       return CustomAppColors.white;
     }),
-    minimumSize: WidgetStateProperty.all(const Size(96, 0)),
+    minimumSize: WidgetStateProperty.all(const Size(96, 56)),
     backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
       if (states.contains(WidgetState.disabled)) {
         return AppColors.defaultStyle().disabled!;
@@ -24,11 +24,11 @@ class ButtonStyles {
       return CustomAppColors.primaryVariant;
     }),
     shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
-      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
+      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(28));
     }),
     elevation: WidgetStateProperty.resolveWith<double>((states) {
       if (states.contains(WidgetState.pressed)) {
-        return 6;
+        return 4;
       }
       return 2;
     }),
@@ -36,16 +36,19 @@ class ButtonStyles {
 
   static ButtonStyle white = defaultStyle.copyWith(
     foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-      return AppColors.defaultStyle().text!;
+      return CustomAppColors.gray1;
     }),
     backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
       if (states.contains(WidgetState.disabled)) {
         return CustomAppColors.gray4;
       }
-      return CustomAppColors.white;
+      return CustomAppColors.gray6;
     }),
     overlayColor: WidgetStateProperty.resolveWith<Color>((states) {
-      return CustomAppColors.primary.withAlpha(40);
+      return CustomAppColors.gray5;
+    }),
+    shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
+      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(28));
     }),
   );
 
