@@ -49,18 +49,4 @@ class MainRouter implements AppRouter {
     );
     return route!(settings: settings);
   }
-
-  static Route<T> _buildRoute<T>(
-    Widget child, {
-    required RouteSettings? settings,
-    bool fullScreenDialog = false,
-  }) {
-    return CupertinoPageRoute<T>(
-      settings: settings,
-      fullscreenDialog: fullScreenDialog,
-      builder: (context) {
-        return child;
-      },
-    );
-  }
 }

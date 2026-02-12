@@ -1,4 +1,5 @@
 // Names tend to be determined from http://chir.ag/projects/name-that-color
+// For token-based design systems, use ColourTokens from common/styles/tokens/tokens.dart
 import 'package:flutter/material.dart';
 
 extension BuildContextColorExtension on BuildContext {
