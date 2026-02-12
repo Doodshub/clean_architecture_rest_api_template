@@ -19,3 +19,10 @@ class UserAsUnAuthenticatedStream extends AuthenticationEvent {
   @override
   List<Object> get props => [];
 }
+
+/// Logout event - clears token and user data
+class Logout extends AuthenticationEvent {
+  const Logout();
+  @override
+  List<Object> get props => [];
+}

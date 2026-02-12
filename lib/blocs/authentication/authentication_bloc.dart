@@ -4,7 +4,10 @@ import 'package:clean_architecture_template/common/bloc/event.dart';
 import 'package:clean_architecture_template/common/bloc/state.dart';
 import 'package:clean_architecture_template/common/models/user/user.dart';
 import 'package:clean_architecture_template/common/services/user_service.dart';
+import 'package:clean_architecture_template/data/database/database_service.dart';
+import 'package:clean_architecture_template/data/database/databases.dart';
 import 'package:clean_architecture_template/dependencies/dependency_manager.dart';
+import 'package:clean_architecture_template/services/token_service.dart';
 
 part 'authentication_event.dart';
 
@@ -17,6 +20,7 @@ class AuthenticationBloc
   AuthenticationBloc() : super(AuthenticationState.initial()) {
     on<UserStream>(_onUserStream);
     on<UserAsUnAuthenticatedStream>(_onUserAsUnAuthenticatedStream);
+    on<Logout>(_onLogout);
   }
 
   void init() {
@@ -53,6 +57,15 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     // Clear user - mark as unauthenticated
+    emit(state.copyWith(user: null));
+  }
+
+  FutureOr<void> _onLogout(
+    Logout event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    await sl<TokenService>().deleteToken();
+    await sl<DatabaseService>().deleteAll(UserDatabase().name);
     emit(state.copyWith(user: null));
   }
 }

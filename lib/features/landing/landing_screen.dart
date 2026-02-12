@@ -11,15 +11,6 @@ import 'package:logger/logger.dart';
 /// and the main app. Consuming apps must provide builders for authenticated
 /// and unauthenticated states.
 ///
-/// Example:
-/// ```dart
-/// LandingScreen(
-///   dependencyManager: dependencyManager,
-///   splashScreenBuilder: (context) => MySplashScreen(),
-///   authenticatedBuilder: (context, authState) => MainScreen(),
-///   unauthenticatedBuilder: (context) => OnboardingScreen(),
-/// )
-/// ```
 class LandingScreen extends StatefulWidget {
   final DependencyManager dependencyManager;
 
@@ -97,11 +88,15 @@ class _LandingScreenState extends State<LandingScreen> {
           },
           builder: (context, state) {
             // Check if user is authenticated
-            if (state.user == null || !(state.user?.isAuthenticated ?? false)) {
-              return widget.unauthenticatedBuilder(context);
-            }
-
-            return widget.authenticatedBuilder(context, state);
+            final isAuthenticated =
+                state.user != null && (state.user?.isAuthenticated ?? false);
+            return KeyedSubtree(
+              key: ValueKey(isAuthenticated),
+              child:
+                  isAuthenticated
+                      ? widget.authenticatedBuilder(context, state)
+                      : widget.unauthenticatedBuilder(context),
+            );
           },
         );
       },
