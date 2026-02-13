@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:clean_architecture_template/common/styles/app_colors.dart';
 
 /// An elevated text field with shadow effect matching the Trackify design
@@ -29,6 +30,8 @@ class ElevatedInputField extends StatelessWidget {
   final bool autofocus;
   final String? initialValue;
   final InputDecoration? decoration;
+  final List<TextInputFormatter>? inputFormatters;
+  final Key? formFieldKey;
 
   const ElevatedInputField({
     super.key,
@@ -50,6 +53,8 @@ class ElevatedInputField extends StatelessWidget {
     this.autofocus = false,
     this.initialValue,
     this.decoration,
+    this.inputFormatters,
+    this.formFieldKey,
   });
 
   @override
@@ -73,6 +78,7 @@ class ElevatedInputField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        key: formFieldKey,
         controller: controller,
         obscureText: obscureText,
         keyboardType: keyboardType,
@@ -86,6 +92,7 @@ class ElevatedInputField extends StatelessWidget {
         focusNode: focusNode,
         autofocus: autofocus,
         initialValue: initialValue,
+        inputFormatters: inputFormatters,
         style: const TextStyle(
           fontFamily: 'Figtree',
           fontSize: 16,
