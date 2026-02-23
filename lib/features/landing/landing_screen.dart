@@ -18,6 +18,10 @@ class LandingScreen extends StatefulWidget {
   /// If null, shows an empty SizedBox.
   final Widget Function(BuildContext)? splashScreenBuilder;
 
+  /// Duration to display the splash screen before transitioning.
+  /// Defaults to 2 seconds.
+  final Duration splashDuration;
+
   /// Builder for the authenticated state.
   /// Receives the current AuthenticationState.
   /// Required - apps must provide their main authenticated UI.
@@ -33,6 +37,7 @@ class LandingScreen extends StatefulWidget {
     required this.authenticatedBuilder,
     required this.unauthenticatedBuilder,
     this.splashScreenBuilder,
+    this.splashDuration = const Duration(seconds: 2),
   });
 
   @override
@@ -42,7 +47,10 @@ class LandingScreen extends StatefulWidget {
 class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
-    context.read<AppBloc>().initializeApp(widget.dependencyManager);
+    context.read<AppBloc>().initializeApp(
+          widget.dependencyManager,
+          splashDuration: widget.splashDuration,
+        );
     super.initState();
   }
 

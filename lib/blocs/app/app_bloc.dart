@@ -9,13 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppBloc extends Cubit<AppState> {
   AppBloc() : super(AppState());
 
-  Future<void> initializeApp(DependencyManager dependencyManager) async {
+  Future<void> initializeApp(
+    DependencyManager dependencyManager, {
+    Duration splashDuration = const Duration(seconds: 2),
+  }) async {
     emit(
       state.copyWith(initialized: false, error: null, showSplashScreen: true),
     );
 
-    // Fake splash screen
-    await Future.delayed(const Duration(seconds: 2));
+    // Splash screen duration (configurable by library consumer)
+    await Future.delayed(splashDuration);
 
     // to make sure dependencies were initialized well
     // before we proceed to the next screen
