@@ -57,18 +57,12 @@ class AppSpacing {
     double top = 0,
     double right = 0,
     double bottom = 0,
-  }) =>
-      EdgeInsets.only(
-        left: left,
-        top: top,
-        right: right,
-        bottom: bottom,
-      );
+  }) => EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);
 
   /// Scale factor for tablet (1.25) and desktop (1.25). Mobile stays 1.0.
   /// Deprecated: Use context.scaleFactor for proportional scaling instead.
   static double _scaleFactor(BuildContext context) {
-    return context.isTablet || context.isDesktop ? 1.25 : 1.0;
+    return context.isTablet || context.isDesktop ? 1.10 : 1.0;
   }
 
   /// Returns [value] scaled for tablet/desktop. Use for responsive spacing.
