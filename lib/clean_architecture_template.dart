@@ -22,14 +22,18 @@ export 'blocs/app/app_bloc.dart';
 export 'blocs/app/base_cubit.dart';
 
 // Dependency Injection
+export 'app/di/dependency_manager.dart';
 export 'dependencies/dependency_manager.dart';
 export 'dependencies/app_dependency_provider.dart';
 export 'dependencies/authenticated_dependency_provider.dart';
 
 // Routing
 export 'common/routes/root_router.dart';
+export 'common/routes/authenticated_router.dart';
 export 'common/routes/main_router.dart';
+export 'common/routes/unauthenticated_router.dart';
 export 'common/routes/onboarding_router.dart';
+export 'common/routes/navigation_service.dart';
 export 'common/routes/route_helper.dart';
 export 'common/routes/route_configuration.dart';
 
