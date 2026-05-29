@@ -31,6 +31,10 @@ class ElevatedInputField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
   final bool autofocus;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final AutovalidateMode? autovalidateMode;
+  final TextStyle? style;
   final String? initialValue;
   final InputDecoration? decoration;
   final List<TextInputFormatter>? inputFormatters;
@@ -54,6 +58,10 @@ class ElevatedInputField extends StatelessWidget {
     this.textInputAction,
     this.focusNode,
     this.autofocus = false,
+    this.readOnly = false,
+    this.onTap,
+    this.autovalidateMode,
+    this.style,
     this.initialValue,
     this.decoration,
     this.inputFormatters,
@@ -82,14 +90,19 @@ class ElevatedInputField extends StatelessWidget {
         textInputAction: textInputAction,
         focusNode: focusNode,
         autofocus: autofocus,
+        readOnly: readOnly,
+        onTap: onTap,
+        autovalidateMode: autovalidateMode,
         initialValue: initialValue,
         inputFormatters: inputFormatters,
-        style: TextStyle(
-          fontFamily: 'Figtree',
-          fontSize: 16 * scale,
-          fontWeight: FontWeight.w400,
-          color: CustomAppColors.gray1,
-        ),
+        style:
+            style ??
+            TextStyle(
+              fontFamily: 'Figtree',
+              fontSize: 16 * scale,
+              fontWeight: FontWeight.w400,
+              color: CustomAppColors.gray1,
+            ),
         decoration:
             decoration ??
             InputDecoration(
