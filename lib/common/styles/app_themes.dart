@@ -23,6 +23,11 @@ class AppThemes {
     return ScaledThemeBuilder.buildScaled(scale, dark: dark);
   }
 
+  /// Builds both light and dark themes with all dimensions scaled by [scale].
+  static ScaledThemeSet buildScaledSet(double scale) {
+    return ScaledThemeBuilder.buildScaledSet(scale);
+  }
+
   static final defaultStyle = ThemeData(
     brightness: Brightness.light,
     splashColor: CustomAppColors.primary.withAlpha(30),

@@ -21,6 +21,11 @@ import 'package:clean_architecture_template/common/styles/text_themes.dart';
 class ScaledThemeBuilder {
   ScaledThemeBuilder._();
 
+  /// Builds light and dark themes with all dimensions scaled by [scale].
+  static ScaledThemeSet buildScaledSet(double scale) {
+    return ScaledThemeSet(light: _buildLight(scale), dark: _buildDark(scale));
+  }
+
   /// Builds light theme with all dimensions scaled by [scale].
   static ThemeData buildScaled(double scale, {bool dark = false}) {
     if (dark) {
@@ -54,10 +59,7 @@ class ScaledThemeBuilder {
       dividerTheme: DividerThemes.scaled(scale),
       bottomNavigationBarTheme: BottomNavigationBarThemes.scaled(scale),
       bottomAppBarTheme: BottomAppBarThemes.scaled(scale),
-      extensions: [
-        AppColors.defaultStyle(),
-        AppTextStyles.light(scale),
-      ],
+      extensions: [AppColors.defaultStyle(), AppTextStyles.light(scale)],
     );
   }
 
@@ -90,11 +92,15 @@ class ScaledThemeBuilder {
       dividerTheme: DividerThemes.darkScaled(scale),
       bottomNavigationBarTheme: BottomNavigationBarThemes.darkScaled(scale),
       bottomAppBarTheme: BottomAppBarThemes.scaled(scale),
-      extensions: [
-        AppColors.dark(),
-        AppTextStyles.dark(scale),
-      ],
+      extensions: [AppColors.dark(), AppTextStyles.dark(scale)],
       colorScheme: ColorSchemes.darkStyle.copyWith(brightness: Brightness.dark),
     );
   }
+}
+
+class ScaledThemeSet {
+  const ScaledThemeSet({required this.light, required this.dark});
+
+  final ThemeData light;
+  final ThemeData dark;
 }
